@@ -3,7 +3,26 @@
     <title>OSS Mechanics Landing Page</title>
 
     <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="tab.css">
+
+    <script src="js/ui.js"></script>
 </head>
 <body>
-    Ding
+    <div id="masterHolder" class="holder">
+        <div class="menu">
+            <div class="tabBar">
+                <button id="InventoryButton" class="tabLink" onclick="openTab(event, 'Inventory')">Inventory</button>
+                <button class="tabLink" onclick="openTab(event, 'Stats')">Stats</button>
+            </div>
+            <div id="Inventory" class="tabcontent"><h2>Inventory</h2></div>
+            <div id="Stats" class="tabcontent"><h2>Stats</h2>OOoooooooopss nothing here yet...</div>
+        </div>
+        
+        <div class="mapDiv">
+            <canvas class="mapCan"></canvas>
+        </div>
+    </div>
+    <script>
+        document.getElementById("InventoryButton").click();
+    </script>
 </body>

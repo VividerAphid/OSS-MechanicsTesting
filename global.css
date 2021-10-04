@@ -2,3 +2,21 @@ body{
     background-color: #222;
     color: #fff;
 }
+.holder{
+    display: "inline-block";
+}
+.menu{
+    border: 3px solid rgb(175, 174, 174);
+	border-radius: 5px;
+	width: 32%;
+	vertical-align: top;
+	display: inline-block;
+}
+.mapDiv{
+    display: inline;
+}
+.mapCan{
+    border: 3px solid rgb(175, 174, 174);
+	border-radius: 5px;
+	width: 65%;
+}
