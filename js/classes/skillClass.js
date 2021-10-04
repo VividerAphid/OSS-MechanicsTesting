@@ -1,6 +1,6 @@
 class skill{
     constructor(name, parent, parentGain){
-        console.log("creating " + name);
+        //console.log("creating " + name);
         this.name = name;
         this.xp = 0;
         this.level = 1;

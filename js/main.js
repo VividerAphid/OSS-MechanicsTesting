@@ -1,0 +1,1 @@
+var testPlayer = new player(1, "Player");
