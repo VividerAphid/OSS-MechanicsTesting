@@ -1,4 +1,4 @@
-function generateMaterialArt(G, materialArtist){
+function generateMaterialArt(G, materialArtist, materialList){
     let count = 20;
     let canvasMax = 450;
     let canvasMin = 50;
@@ -16,16 +16,22 @@ function generateMaterialArt(G, materialArtist){
         //let doCounterClockwise = false;
         //if(clockwiseNum > .5) doCounterClockwise = true;
 
-        let startAngle = Math.random() * (maxStartAngle - minStartAngle) - minStartAngle;
+        let startAngle = 0;//Math.random() * (maxStartAngle - minStartAngle) - minStartAngle;
 
         let colour = "rgb("+rCol+","+gCol+","+bCol+")";
 
-        console.log(r + " " + colour);
-
-        materialArtist.drawCircular(coordinates[r][0], coordinates[r][1], colour, 10, startAngle);
-
-        materialArtist.drawDebugText(coordinates[r][0], coordinates[r][1], r, "bold 15px Arial", "#000");
-        
+        let attribHolder = {
+            col: colour,
+            x: coordinates[r][0],
+            y: coordinates[r][1],
+            rad: 10,
+            startAng: startAngle,
+            draw: function(artist){
+                artist.drawCircular(this.x, this.y, this.col, this.rad, this.startAng);
+                artist.drawDebugText(this.x, this.y, r, "bold 15px Arial", "#000");
+            }
+        };
+        materialList[r].renderer = attribHolder;
     }    
 
     console.log("ding!");

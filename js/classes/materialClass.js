@@ -4,5 +4,6 @@ class material extends item{
         this.hardness = hardness;
         this.weight = weight;
         this.type = type;
+        this.renderer;
     }
 }

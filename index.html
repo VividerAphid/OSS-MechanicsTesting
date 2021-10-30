@@ -8,6 +8,7 @@
     <script src="js/ui.js"></script>
     <script src="js/classes/playerClass.js"></script>
     <script src="js/classes/itemClass.js"></script>
+    <script src="js/classes/materialClass.js"></script>
     <script src="js/classes/skillClass.js"></script>
     <script src="js/classes/ItemStack.js"></script>
     <script src="js/classes/Inventory.js"></script>
@@ -32,12 +33,11 @@
     </div>
     <script>
         document.getElementById("InventoryButton").click();
-        var testItem = new item(1, "GubbaItem", true, 1000);
-        var testItemStack = new ItemStack(testItem, 2);
-        var testItem2 = new item(1, "GubbaItem", true, 1000);
-        console.log(testItemStack.isMergeableWith(testItem2));
+
         var ctx = document.getElementById("gameCanvas").getContext("2d");
         var materialArtist = new artist(ctx);
-        generateMaterialArt(ctx, materialArtist);
+        //generateMaterialArt(ctx, materialArtist);
+        var sampleMats = generateMaterialCategory(ctx, materialArtist, 20, 1);
+        render(materialArtist, sampleMats);
     </script>
 </body>
