@@ -21,3 +21,17 @@ function render(materialArtist, materialList){
         materialList[r].renderer.draw(materialArtist);
     }
 }
+
+function checkHit(materialList){
+    let canvRect = gameCanvas.getBoundingClientRect();
+	let x = (event.clientX - canvRect.left);
+	let y = (event.clientY - canvRect.top);
+    let reps = materialList.length;
+	for(r=0; r<reps;r++){
+		if (x >= (materialList[r].renderer.x - materialList[r].renderer.rad*2) && x <= (materialList[r].renderer.x + materialList[r].renderer.rad*2)){
+			if (y >= (materialList[r].renderer.y - materialList[r].renderer.rad*2) && y <= (materialList[r].renderer.y + materialList[r].renderer.rad*2)){         
+                console.log(materialList[r]);
+			}
+		}
+    }
+}
