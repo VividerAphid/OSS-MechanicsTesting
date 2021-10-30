@@ -9,6 +9,10 @@
     <script src="js/classes/playerClass.js"></script>
     <script src="js/classes/itemClass.js"></script>
     <script src="js/classes/skillClass.js"></script>
+    <script src="js/classes/ItemStack.js"></script>
+    <script src="js/classes/Inventory.js"></script>
+    <script src="js/classes/materialRender/artist.js"></script>
+    <script src="js/classes/materialRender/materialArtPicker.js"></script>
     <script src="js/main.js"></script>
 </head>
 <body>
@@ -23,11 +27,17 @@
         </div>
         
         <div class="mapDiv">
-            <canvas class="mapCan"></canvas>
+            <canvas class="mapCan" id="gameCanvas" height=500 width=500></canvas>
         </div>
     </div>
     <script>
         document.getElementById("InventoryButton").click();
-        
+        var testItem = new item(1, "GubbaItem", true, 1000);
+        var testItemStack = new ItemStack(testItem, 2);
+        var testItem2 = new item(1, "GubbaItem", true, 1000);
+        console.log(testItemStack.isMergeableWith(testItem2));
+        var ctx = document.getElementById("gameCanvas").getContext("2d");
+        var materialArtist = new artist(ctx);
+        generateMaterialArt(ctx, materialArtist);
     </script>
 </body>

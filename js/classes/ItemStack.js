@@ -7,6 +7,10 @@ class ItemStack{
     }
 
     isMergeableWith(ite){
-        return (this.item.id = ite.id);
+        return (this.item.id == ite.id);
+    }
+
+    getRemainingSpace(){
+        return this.maxStack - this.stackCount;
     }
 }
