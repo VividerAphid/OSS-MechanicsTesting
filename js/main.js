@@ -20,7 +20,17 @@ function generateMaterialCategory(G, materialArtist, count, type){
 
 function render(materialArtist, materialList){
     for(let r = 0; r < materialList.length; r++){
-        materialList[r].renderer.draw(materialArtist);
+        materialList[r].renderer.draw(materialArtist, materialList[r].renderer.x, materialList[r].renderer.y);
+    }
+}
+
+function updateInventoryCanvases(){
+    for(let r = 0; r < testPlayer.inventory.slots.length; r++){
+        console.log("slots"+r);
+        let ctx = testPlayer.inventory.visualSlots[r].getContext("2d");
+        let tmpArtist = new artist(ctx);
+        let item = testPlayer.inventory.slots[r].item;
+        item.renderer.draw(tmpArtist, 0, 0);
     }
 }
 
@@ -34,6 +44,7 @@ function checkHit(materialList){
 		if (x >= (materialList[r].renderer.x - itemWidth) && x <= (materialList[r].renderer.x + itemWidth)){
 			if (y >= (materialList[r].renderer.y - itemWidth) && y <= (materialList[r].renderer.y + itemWidth)){         
                 testPlayer.inventory.addItem(materialList[r]);
+                updateInventoryCanvases();
 			}
 		}
     }

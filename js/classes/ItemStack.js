@@ -1,9 +1,10 @@
 class ItemStack{
-    constructor(item, count){
+    constructor(item, count, visualSlot){
         this.item = item;
         this.stackable = item.stackable;
         this.maxStack = item.maxStack;
         this.stackCount = count || 1;
+        this.visualSlot = visualSlot;
     }
 
     isMergeableWith(ite){

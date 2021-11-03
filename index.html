@@ -17,13 +17,18 @@
     <script src="js/main.js"></script>
 </head>
 <body>
-    <div id="masterHolder" class="holder">
+    <div id="masterHolder" class="holder-hidden">
         <div class="menu">
             <div class="tabBar">
                 <button id="InventoryButton" class="tabLink" onclick="openTab(event, 'Inventory')">Inventory</button>
                 <button class="tabLink" onclick="openTab(event, 'Stats')">Stats</button>
             </div>
-            <div id="Inventory" class="tabcontent"><h2>Inventory</h2></div>
+            <div id="Inventory" class="tabcontent">
+                <h2>Inventory</h2>
+                <div id="slotHolder" class="holder-bordered">
+
+                </div>
+            </div>
             <div id="Stats" class="tabcontent"><h2>Stats</h2>OOoooooooopss nothing here yet...</div>
         </div>
         
@@ -38,6 +43,8 @@
         var materialArtist = new artist(ctx);
         //generateMaterialArt(ctx, materialArtist);
         var sampleMats = generateMaterialCategory(ctx, materialArtist, 20, 1);
+        createInventorySlots(10);
+        testPlayer.inventory.loadVisualSlots();
         render(materialArtist, sampleMats);
     </script>
 </body>

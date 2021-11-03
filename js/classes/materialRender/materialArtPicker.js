@@ -26,9 +26,10 @@ function generateMaterialArt(G, materialArtist, materialList){
             y: coordinates[r][1],
             rad: 10,
             startAng: startAngle,
-            draw: function(artist){
-                artist.drawCircular(this.x, this.y, this.col, this.rad, this.startAng);
-                artist.drawDebugText(this.x, this.y, r, "bold 15px Arial", "#000");
+            draw: function(artist, x, y){
+                //console.log(x +", " + y);
+                artist.drawCircular(x, y, this.col, this.rad, this.startAng);
+                artist.drawDebugText(x, y, r, "bold 15px Arial", "#000");
             }
         };
         materialList[r].renderer = attribHolder;
