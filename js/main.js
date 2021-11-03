@@ -19,6 +19,8 @@ function generateMaterialCategory(G, materialArtist, count, type){
 }
 
 function render(materialArtist, materialList){
+    materialArtist.ctx.fillStyle = "#222";
+    materialArtist.ctx.fillRect(0,0, gameCanvas.width, gameCanvas.height);
     for(let r = 0; r < materialList.length; r++){
         materialList[r].renderer.draw(materialArtist, materialList[r].renderer.x, materialList[r].renderer.y);
     }
@@ -30,7 +32,9 @@ function updateInventoryCanvases(){
         let ctx = testPlayer.inventory.visualSlots[r].getContext("2d");
         let tmpArtist = new artist(ctx);
         let item = testPlayer.inventory.slots[r].item;
-        item.renderer.draw(tmpArtist, 0, 0);
+        ctx.fillStyle = "#222";
+        ctx.fillRect(0, 0, testPlayer.inventory.visualSlots[r].width, testPlayer.inventory.visualSlots[r].height);
+        item.renderer.draw(tmpArtist, 30, 30);
     }
 }
 

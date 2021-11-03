@@ -34,8 +34,8 @@ function createInventorySlots(count){
     };
     addElement(canProp);
     let tmpCanv = document.getElementById("invSlot" + r + "-canvas");
-    tmpCanv.width = "100%";
-    tmpCanv.height = "100%";
+    tmpCanv.width = 60;
+    tmpCanv.height = 60;
 
   }
 }
