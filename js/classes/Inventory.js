@@ -27,7 +27,7 @@ class Inventory{
                 this.slots.push(new ItemStack(item, 1, this.visualSlots[this.currentSlot]));
                 this.currentSlot++;
             }
-            console.log(this);
+            //console.log(this);
         }
         else{
             console.log("Inventory full!");

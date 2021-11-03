@@ -12,7 +12,7 @@ function generateMaterialCategory(G, materialArtist, count, type){
     for(let r = 0; r < count; r++){
         let hard = (r*5) + (Math.round(Math.random()*5)) + 1;
         let weig = (r*3) + (Math.round(Math.random()*3)) + 1;
-        mats[r] = new material(r, "Material" + r, true, 10, hard, weig, type);
+        mats[r] = new material(r, "Material" + r, true, 100, hard, weig, type);
     }
     generateMaterialArt(G, materialArtist, mats);
     return mats;
@@ -28,7 +28,7 @@ function render(materialArtist, materialList){
 
 function updateInventoryCanvases(){
     for(let r = 0; r < testPlayer.inventory.slots.length; r++){
-        console.log("slots"+r);
+       //console.log("slots"+r);
         let ctx = testPlayer.inventory.visualSlots[r].getContext("2d");
         let tmpArtist = new artist(ctx);
         let item = testPlayer.inventory.slots[r].item;

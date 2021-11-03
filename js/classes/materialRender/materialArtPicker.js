@@ -5,7 +5,7 @@ function generateMaterialArt(G, materialArtist, materialList){
     let minStartAngle = 0;
     let maxStartAngle = 3;
 
-    let coordinates = generateCoordinateSet(500, 500, 20, 50, 60);
+    let coordinates = generateCoordinateSet(500, 500, 20, 20, 30);
 
     for(let r = 0; r < count; r++){
         let rCol = Math.round(Math.random()*256);
