@@ -1,5 +1,7 @@
 var testPlayer = new player(1, "Player");
 var materials = [];
+var playerInventory = new Inventory(10);
+testPlayer.inventory = playerInventory;
 
 function fillMaterials(){
     
@@ -10,7 +12,7 @@ function generateMaterialCategory(G, materialArtist, count, type){
     for(let r = 0; r < count; r++){
         let hard = (r*5) + (Math.round(Math.random()*5)) + 1;
         let weig = (r*3) + (Math.round(Math.random()*3)) + 1;
-        mats[r] = new material(r, "Material" + r, true, hard, weig, type);
+        mats[r] = new material(r, "Material" + r, true, 10, hard, weig, type);
     }
     generateMaterialArt(G, materialArtist, mats);
     return mats;
@@ -28,9 +30,10 @@ function checkHit(materialList){
 	let y = (event.clientY - canvRect.top);
     let reps = materialList.length;
 	for(r=0; r<reps;r++){
-		if (x >= (materialList[r].renderer.x - materialList[r].renderer.rad*2) && x <= (materialList[r].renderer.x + materialList[r].renderer.rad*2)){
-			if (y >= (materialList[r].renderer.y - materialList[r].renderer.rad*2) && y <= (materialList[r].renderer.y + materialList[r].renderer.rad*2)){         
-                console.log(materialList[r]);
+        let itemWidth = materialList[r].renderer.rad + Math.ceil(materialList[r].renderer.rad * .1);
+		if (x >= (materialList[r].renderer.x - itemWidth) && x <= (materialList[r].renderer.x + itemWidth)){
+			if (y >= (materialList[r].renderer.y - itemWidth) && y <= (materialList[r].renderer.y + itemWidth)){         
+                testPlayer.inventory.addItem(materialList[r]);
 			}
 		}
     }

@@ -4,7 +4,7 @@ class player{
         this.name = name;
         this.skills = this.initSkills();
         this.health = 100;
-        this.inventory = {slots: 10};
+        this.inventory;
     }
 
     initSkills(){
