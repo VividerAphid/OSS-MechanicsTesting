@@ -34,7 +34,11 @@ function updateInventoryCanvases(){
         let item = testPlayer.inventory.slots[r].item;
         ctx.fillStyle = "#222";
         ctx.fillRect(0, 0, testPlayer.inventory.visualSlots[r].width, testPlayer.inventory.visualSlots[r].height);
-        item.renderer.draw(tmpArtist, 30, 30);
+        item.renderer.draw(tmpArtist, 30, 20);
+        ctx.fillStyle = "#fff";
+        ctx.strokeStyle = "#fff";
+        ctx.font = "bold 15px Arial";
+        ctx.fillText(testPlayer.inventory.slots[r].stackCount, 25, 45);
     }
 }
 
