@@ -50,6 +50,9 @@
         gameCanvas.addEventListener("mousedown", (e) => onPointerDown(e, materialArtist));
         gameCanvas.addEventListener("mouseup", (e) => onPointerUp(e, materialArtist, sampleMats));
         gameCanvas.addEventListener("mousemove", (e) => onPointerMove(e, materialArtist));
+        gameCanvas.addEventListener("touchstart", (e) => handleTouch(e, materialArtist, sampleMats));
+        gameCanvas.addEventListener("touchmove", (e) => handleTouch(e, materialArtist, sampleMats));
+        gameCanvas.addEventListener("touchend", (e) => handleTouch(e, materialArtist, sampleMats));
 
         requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, sampleMats);});
     </script>
