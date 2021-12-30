@@ -72,7 +72,7 @@ function onPointerUp(e, art, mats)
     art.isDragging = false;
     art.lastZoom = art.cameraZoom;
     if(!art.dragChanged){
-      console.log("clicked!");
+      //console.log("clicked!");
       checkHit(mats, art);
     }
     art.dragChanged = false;
@@ -85,8 +85,8 @@ function onPointerMove(e, art)
       art.cameraOffset.x = getEventLocation(e).x / art.cameraZoom - art.dragStart.x;
       art.cameraOffset.y = getEventLocation(e).y / art.cameraZoom - art.dragStart.y;
       art.dragChanged = true;
-      console.log("drag detected");
-      console.log(art.cameraOffset);
+      //console.log("drag detected");
+      //console.log(art.cameraOffset);
     }
     //console.log("pointermove");
 }
@@ -95,52 +95,47 @@ function handleTouch(e, singleTouchHandler, art, mats)
 {
     if ( e.touches.length == 1 )
     {
-        singleTouchHandler(e, art, mats)
+        singleTouchHandler(e, art, mats);
     }
     else if (e.type == "touchmove" && e.touches.length == 2)
     {
-        art.isDragging = false
+        art.isDragging = false;
         //handlePinch(e)
     }
 }
 
 function handlePinch(e)
 {
-    e.preventDefault()
+    e.preventDefault();
     
-    let touch1 = { x: e.touches[0].clientX, y: e.touches[0].clientY }
-    let touch2 = { x: e.touches[1].clientX, y: e.touches[1].clientY }
+    let touch1 = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    let touch2 = { x: e.touches[1].clientX, y: e.touches[1].clientY };
     
-    let currentDistance = (touch1.x - touch2.x)**2 + (touch1.y - touch2.y)**2
+    let currentDistance = (touch1.x - touch2.x)**2 + (touch1.y - touch2.y)**2;
     
-    if (initialPinchDistance == null)
-    {
-        initialPinchDistance = currentDistance
+    if (initialPinchDistance == null){
+        initialPinchDistance = currentDistance;
     }
-    else
-    {
-        adjustZoom( null, currentDistance/initialPinchDistance )
+    else{
+        adjustZoom(null, currentDistance/initialPinchDistance);
     }
 }
 
 function adjustZoom(zoomAmount, zoomFactor)
 {
-    if (!isDragging)
-    {
-        if (zoomAmount)
-        {
-            cameraZoom += zoomAmount
+    if (!isDragging){
+        if (zoomAmount){
+            cameraZoom += zoomAmount;
         }
-        else if (zoomFactor)
-        {
-            console.log(zoomFactor)
-            cameraZoom = zoomFactor*lastZoom
+        else if (zoomFactor){
+            console.log(zoomFactor);
+            cameraZoom = zoomFactor*lastZoom;
         }
         
-        cameraZoom = Math.min( cameraZoom, MAX_ZOOM )
-        cameraZoom = Math.max( cameraZoom, MIN_ZOOM )
+        cameraZoom = Math.min(cameraZoom, MAX_ZOOM);
+        cameraZoom = Math.max(cameraZoom, MIN_ZOOM);
         
-        console.log(zoomAmount)
+        console.log(zoomAmount);
     }
 }
 
