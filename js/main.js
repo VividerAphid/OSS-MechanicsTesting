@@ -42,12 +42,18 @@ function updateInventoryCanvases(){
     }
 }
 
-function checkHit(materialList){
+function checkHit(materialList, art){
+    //console.log("checkHit");
     let canvRect = gameCanvas.getBoundingClientRect();
-	let x = (event.clientX - canvRect.left);
-	let y = (event.clientY - canvRect.top);
+    let tempOffset = {x: (art.cameraOffset.x - (gameCanvas.width/2)), y: (art.cameraOffset.y - (gameCanvas.height/2))};
+	let x = (event.clientX - canvRect.left) - (art.cameraOffset.x - (gameCanvas.width/2));
+	let y = (event.clientY - canvRect.top) - (art.cameraOffset.y - (gameCanvas.height/2));
     let reps = materialList.length;
-	for(r=0; r<reps;r++){
+    //console.log("item 2 is at " + materialList[2].renderer.x + ", " + materialList[2].renderer.y);
+    //console.log("click registered at " + x + ", " + y);
+    //console.log("offset is " + art.cameraOffset.x + ", " + art.cameraOffset.y);
+    //console.log("temp offset is " + tempOffset.x + ", " + tempOffset.y);
+	for(let r=0; r<reps;r++){
         let itemWidth = materialList[r].renderer.rad + Math.ceil(materialList[r].renderer.rad * .1);
 		if (x >= (materialList[r].renderer.x - itemWidth) && x <= (materialList[r].renderer.x + itemWidth)){
 			if (y >= (materialList[r].renderer.y - itemWidth) && y <= (materialList[r].renderer.y + itemWidth)){         

@@ -1,6 +1,15 @@
 class artist{
     constructor(ctx){
         this.ctx = ctx;
+        //panning and zooming stuff
+        this.cameraOffset = {x: this.ctx.canvas.width/2, y: this.ctx.canvas.height/2};
+        this.cameraZoom = 1;
+        this.maxZoom = 5;
+        this.minZoom = 0.1;
+        this.scrollSensitivity = 0.0005;
+        this.isDragging = false;
+        this.dragChanged = false;
+        this.dragStart = {x: 0, y: 0};
     }
 
     drawDebugText(x, y, text, font, colour){

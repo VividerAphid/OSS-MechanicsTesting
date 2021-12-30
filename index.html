@@ -33,7 +33,7 @@
         </div>
         
         <div class="mapDiv">
-            <canvas class="mapCan" id="gameCanvas" height=500 width=500 onclick=checkHit(sampleMats)></canvas>
+            <canvas class="mapCan" id="gameCanvas" height=500 width=500 ></canvas>
         </div>
     </div>
     <script>
@@ -46,5 +46,11 @@
         createInventorySlots(10);
         testPlayer.inventory.loadVisualSlots();
         render(materialArtist, sampleMats);
+
+        gameCanvas.addEventListener("mousedown", (e) => onPointerDown(e, materialArtist));
+        gameCanvas.addEventListener("mouseup", (e) => onPointerUp(e, materialArtist, sampleMats));
+        gameCanvas.addEventListener("mousemove", (e) => onPointerMove(e, materialArtist));
+
+        requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, sampleMats);});
     </script>
 </body>
