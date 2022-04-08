@@ -61,6 +61,7 @@ function getEventLocation(e)
 
 function onPointerDown(e, art)
 {
+  //console.log("pointerdown");
     art.isDragging = true;
     art.dragStart.x = getEventLocation(e).x/ art.cameraZoom - art.cameraOffset.x;
     art.dragStart.y = getEventLocation(e).y/ art.cameraZoom - art.cameraOffset.y;
@@ -69,6 +70,7 @@ function onPointerDown(e, art)
 
 function onPointerUp(e, art, mats)
 {
+  //console.log("pointerup");
     art.isDragging = false;
     art.lastZoom = art.cameraZoom;
     if(!art.dragChanged){
@@ -80,25 +82,33 @@ function onPointerUp(e, art, mats)
 
 function onPointerMove(e, art)
 {
+  //console.log("pointermove");
     if (art.isDragging)
     {
-      art.cameraOffset.x = getEventLocation(e).x / art.cameraZoom - art.dragStart.x;
-      art.cameraOffset.y = getEventLocation(e).y / art.cameraZoom - art.dragStart.y;
-      art.dragChanged = true;
-      //console.log("drag detected");
-      //console.log(art.cameraOffset);
+      //console.log("checking drag");
+      tempOffsetX = getEventLocation(e).x / art.cameraZoom - art.dragStart.x;
+      tempOffsetY = getEventLocation(e).y / art.cameraZoom - art.dragStart.y;
+      if(art.cameraOffset.x != tempOffsetX ||  art.cameraOffset.y != tempOffsetY){
+        //console.log("drag");
+        art.cameraOffset.x = getEventLocation(e).x / art.cameraZoom - art.dragStart.x;
+        art.cameraOffset.y = getEventLocation(e).y / art.cameraZoom - art.dragStart.y;
+        art.dragChanged = true;
+      }
+      
     }
-    //console.log("pointermove");
 }
 
 function handleTouch(e, singleTouchHandler, art, mats)
 {
+  //console.log(e.type);
     if ( e.touches.length == 1 )
     {
+      //console.log("touch");
         singleTouchHandler(e, art, mats);
     }
     else if (e.type == "touchmove" && e.touches.length == 2)
     {
+      //console.log("pinch");
         art.isDragging = false;
         //handlePinch(e)
     }
