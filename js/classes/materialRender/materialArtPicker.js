@@ -5,8 +5,6 @@ function generateMaterialArt(G, materialArtist, materialList){
     let minStartAngle = 0;
     let maxStartAngle = 3;
 
-    let coordinates = generateCoordinateSet(500, 500, 20, 20, 30);
-
     for(let r = 0; r < count; r++){
         let rCol = Math.round(Math.random()*256);
         let gCol = Math.round(Math.random()*256);
@@ -16,14 +14,12 @@ function generateMaterialArt(G, materialArtist, materialList){
         //let doCounterClockwise = false;
         //if(clockwiseNum > .5) doCounterClockwise = true;
 
-        let startAngle = 0;//Math.random() * (maxStartAngle - minStartAngle) - minStartAngle;
+        let startAngle = 0; //Math.random() * (maxStartAngle - minStartAngle) - minStartAngle;
 
         let colour = "rgb("+rCol+","+gCol+","+bCol+")";
 
         let attribHolder = {
             col: colour,
-            x: coordinates[r][0],
-            y: coordinates[r][1],
             rad: 10,
             startAng: startAngle,
             draw: function(artist, x, y){

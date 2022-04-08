@@ -65,7 +65,6 @@ function onPointerDown(e, art)
     art.isDragging = true;
     art.dragStart.x = getEventLocation(e).x/ art.cameraZoom - art.cameraOffset.x;
     art.dragStart.y = getEventLocation(e).y/ art.cameraZoom - art.cameraOffset.y;
-    //console.log("pointerdown");
 }
 
 function onPointerUp(e, art, mats)
@@ -155,5 +154,5 @@ function updateTranslationAndZoom(art, mats){
   art.ctx.clearRect(0, 0, art.ctx.canvas.width, art.ctx.canvas.height);
   art.ctx.translate(-art.ctx.canvas.width / 2 + art.cameraOffset.x, -art.ctx.canvas.height/2 + art.cameraOffset.y);
   render(art, mats);
-  requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, sampleMats);});
+  requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, materialNodes);});
 }

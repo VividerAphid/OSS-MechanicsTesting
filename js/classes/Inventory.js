@@ -10,6 +10,7 @@ class Inventory{
             let found = false;
             let location;
             this.slots.forEach(element => {
+                //console.log(element.item);
                 if(element.item.id == item.id){
                     console.log("Found!");
                     if(element.getRemainingSpace() > 0){

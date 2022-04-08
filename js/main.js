@@ -3,9 +3,6 @@ var materials = [];
 var playerInventory = new Inventory(10);
 testPlayer.inventory = playerInventory;
 
-function fillMaterials(){
-    
-}
 
 function generateMaterialCategory(G, materialArtist, count, type){
     let mats = [];
@@ -18,11 +15,31 @@ function generateMaterialCategory(G, materialArtist, count, type){
     return mats;
 }
 
+function generateMaterialNodes(materialList, maxOfEach, width, height){
+    let generatedNodes = [];
+    let idIndex = 0;
+    for(let r = 0; r < materialList.length; r++){
+        let count = Math.round(Math.random()*maxOfEach) + 1;
+        let material = materialList[r];
+        for(let t = 0; t < count; t++){
+            generatedNodes.push(new entity(idIndex, material.name + t, material));
+            idIndex++;
+        }
+    }
+    let coords = generateCoordinateSet(width, height, generatedNodes.length, 20, 30); 
+    //console.log(coords);
+    for(let r = 0; r < generatedNodes.length; r++){
+        generatedNodes[r].x = coords[r][0];
+        generatedNodes[r].y = coords[r][1];
+    }
+    return generatedNodes;
+}
+
 function render(materialArtist, materialList){
     materialArtist.ctx.fillStyle = "#222";
     materialArtist.ctx.fillRect(0,0, gameCanvas.width, gameCanvas.height);
     for(let r = 0; r < materialList.length; r++){
-        materialList[r].renderer.draw(materialArtist, materialList[r].renderer.x, materialList[r].renderer.y);
+        materialList[r].item.renderer.draw(materialArtist, materialList[r].x, materialList[r].y);
     }
 }
 
@@ -54,10 +71,13 @@ function checkHit(entityList, art){
     //console.log("offset is " + art.cameraOffset.x + ", " + art.cameraOffset.y);
     //console.log("temp offset is " + tempOffset.x + ", " + tempOffset.y);
 	for(let r=0; r<reps;r++){
-        let itemWidth = entityList[r].renderer.rad + Math.ceil(entityList[r].renderer.rad * .1);
-		if (x >= (entityList[r].renderer.x - itemWidth) && x <= (entityList[r].renderer.x + itemWidth)){
-			if (y >= (entityList[r].renderer.y - itemWidth) && y <= (entityList[r].renderer.y + itemWidth)){         
-                testPlayer.inventory.addItem(entityList[r]);
+        let entity = entityList[r];
+        let itemWidth = entityList[r].item.renderer.rad + Math.ceil(entityList[r].item.renderer.rad * .1);
+        let itemRenderer = entityList[r].item.renderer;
+		if (x >= (entity.x - itemWidth) && x <= (entity.x + itemWidth)){
+			if (y >= (entity.y - itemWidth) && y <= (entity.y + itemWidth)){       
+                console.log("hit!");  
+                testPlayer.inventory.addItem(entityList[r].item);
                 updateInventoryCanvases();
 			}
 		}

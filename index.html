@@ -8,6 +8,7 @@
     <script src="js/ui.js"></script>
     <script src="js/classes/playerClass.js"></script>
     <script src="js/classes/itemClass.js"></script>
+    <script src="js/classes/entityClass.js"></script>
     <script src="js/classes/materialClass.js"></script>
     <script src="js/classes/skillClass.js"></script>
     <script src="js/classes/ItemStack.js"></script>
@@ -43,17 +44,19 @@
         var materialArtist = new artist(ctx);
         //generateMaterialArt(ctx, materialArtist);
         var sampleMats = generateMaterialCategory(ctx, materialArtist, 20, 1);
+        var materialNodes = generateMaterialNodes(sampleMats, 3, 1000, 1000);
+        //console.log(materialNodes);
         createInventorySlots(10);
         testPlayer.inventory.loadVisualSlots();
-        render(materialArtist, sampleMats);
+        render(materialArtist, materialNodes);
 
         gameCanvas.addEventListener("mousedown", (e) => onPointerDown(e, materialArtist));
-        gameCanvas.addEventListener("mouseup", (e) => onPointerUp(e, materialArtist, sampleMats));
+        gameCanvas.addEventListener("mouseup", (e) => onPointerUp(e, materialArtist, materialNodes));
         gameCanvas.addEventListener("mousemove", (e) => onPointerMove(e, materialArtist));
-        gameCanvas.addEventListener("touchstart", (e) => handleTouch(e, onPointerDown, materialArtist, sampleMats));
-        gameCanvas.addEventListener("touchmove", (e) => handleTouch(e, onPointerMove, materialArtist, sampleMats));
-        gameCanvas.addEventListener("touchend", (e) => handleTouch(e, onPointerUp, materialArtist, sampleMats));
+        gameCanvas.addEventListener("touchstart", (e) => handleTouch(e, onPointerDown, materialArtist, materialNodes));
+        gameCanvas.addEventListener("touchmove", (e) => handleTouch(e, onPointerMove, materialArtist, materialNodes));
+        gameCanvas.addEventListener("touchend", (e) => handleTouch(e, onPointerUp, materialArtist, materialNodes));
 
-        requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, sampleMats);});
+        requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, materialNodes);});
     </script>
 </body>
