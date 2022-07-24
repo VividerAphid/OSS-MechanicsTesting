@@ -19,7 +19,7 @@ function initCanvas(canvas, width, height){
 }
 
 function fillMap(widthCount, heightCount){
-    let colorList = ["#222", "#fff", "#000", "#555", "#f00", "#0f0", "#00f", "#5e2b02", "#126102", "#021fd9"];
+    let colorList = ["#222", "#fff", "#000", "#555", "#f00", "#0f0", "#00f", "#5e2b02", "#126102", "#021fd9", "#a00", "#aa0", "#0aa"];
     let mapOut = [];
     //let heights = generateHeights(widthCount, heightCount, (heightCount*.6), (heightCount*.85));
     let heights = generatePerlinHeights(widthCount, heightCount);
@@ -31,9 +31,6 @@ function fillMap(widthCount, heightCount){
                 if(y < heights[x][1]) pick = 3;
                 else if(y < heights[x][0] || y < waterLevel-1) pick = 7;
                 else pick = 8;
-                if(Math.random() < .05 && y < heightCount*.1) pick = 1;
-                if(Math.random() < .1 && y < heightCount*.4) pick = 2;
-                if(Math.random() < .1 && y < heightCount*.25) pick = 4;
             }
             else{
                 if(y < waterLevel) pick = 9;
@@ -42,7 +39,32 @@ function fillMap(widthCount, heightCount){
             mapOut[x + y*widthCount] = colorList[pick];
         }
     }
+    mapOut = pickOres(colorList, mapOut, widthCount, heightCount);
     return mapOut;
+}
+
+function pickOres(colors, map, width, height){
+    let ores = [
+        {tries: Math.floor(width*.075), color: colors[1], min: 0, max: height*.1},
+        {tries: Math.floor(width*.2), color: colors[10], min: 0, max: height*.25},
+        {tries: Math.floor(width*.35), color: colors[2], min: 0, max: height*.5},
+        {tries: Math.floor(width*.075), color: colors[11], min: 0, max: height*.5},
+        {tries: Math.floor(width*.2), color: colors[12], min: 0, max: height*.80}
+    ]
+    for(let r = 0; r < ores.length; r++){
+        let min = ores[r].min;
+        let max = ores[r].max;
+        for(let t = 0; t < ores[r].tries; t++){
+            let yPick = Math.floor(Math.random()*(max-min))+min;
+            let xPick = Math.floor(Math.random()*width);
+            if(map[xPick + yPick*width] != "#222") map[xPick + yPick*width] = ores[r].color;
+            if(Math.random() < .25 && map[(xPick-1) + yPick*width] != "#222") map[(xPick-1) + yPick*width] = ores[r].color;
+            if(Math.random() < .25 && map[(xPick+1) + yPick*width] != "#222") map[(xPick+1) + yPick*width] = ores[r].color;
+            if(Math.random() < .25 && map[xPick + (yPick-1)*width] != "#222") map[xPick + (yPick-1)*width] = ores[r].color;
+            if(Math.random() < .25 && map[xPick + (yPick+1)*width] != "#222") map[xPick + (yPick+1)*width] = ores[r].color;
+        }
+    }
+    return map;
 }
 
 function generatePerlinHeights(width, height){
@@ -51,7 +73,7 @@ function generatePerlinHeights(width, height){
     let output = [];
     for(let r = 0; r < noise.length; r++){
         let airHeight = Math.floor(noise[r]*height/2)+Math.floor(height/2);
-        output.push([airHeight, airHeight-5]);
+        output.push([airHeight, airHeight-(Math.floor(Math.random()*3)+4)]);
     }
     return output;    
 }
