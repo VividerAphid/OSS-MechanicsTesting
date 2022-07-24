@@ -1,0 +1,60 @@
+Biomes:
+-Grasslands/Plains => flower Plains
+-forest
+-jungle => swamp
+-ocean => tropical, deep
+-desert => savanah, dry river
+-snow
+
+Animals: REVISIT
+- 1-3 per biome
+    +33% chance for sub biome animal
+    +50% chance for special sub biome
+    1-3 materials by animal type
+
+-avian, mammalian, rept./amphibian, aquatic, insect
+-materials: ??
+    -feather
+    -bone
+    -hide
+    -meat
+    -shell
+    -scale
+    -??
+
+Ores: REVISIT
+10-15 metals
+10-15 stones
+10-15 gems
+5 soils
+(determine crafting tree before determining this)
+
+Plants:
+2-5 per biome
+1-3 material for tree, shrub, grass
+1 for fungus, flower
+
+Crafting:
+-slot based
+-recipes unlocked via crafting level?
+-xp granted from using correct materials
+-correct mat selected from top 3? ideal types
+ 1. 100%
+ 2. 75%
+ 3. 60%
+ 1-10% all others
+-slots autofill with previous materials if used quick craft button
+
+-item quality range 1-100
+-crafting station + crafting skill determines quality
+-augments to stations can be added for bonus recipes / stat benefits
+
+Crafting Stations: 
+-5 levels, unlocked by skill:
+ -hands: 1-20, no aug
+ -T1: 21-40, 3 aug
+ -T2: 41-60, 5 aug
+ -T3: 61-80, 5 aug
+ -T4: 81-100, 7 aug
+
+-augment items are compatible with higher stations, i.e. T1 aug can be used in T3 station

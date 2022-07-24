@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<head>
+    <title>2D Tile Test</title>
+</head>
+
+<link rel="stylesheet" href="global.css">
+
+<script src="js/2DTileTest.js"></script>
+
+<body>
+    <canvas id="mapCanvas">Borke</canvas>
+    <script>
+        var width = 1500;
+        var height = 500;
+        var tileSize = 5;
+        var canvas = document.getElementById("mapCanvas");
+        initCanvas(canvas, width, height);
+        var g = canvas.getContext("2d");
+        //var testMap = ["#f00","#0ff","#f0f"];
+        var map = fillMap(width/tileSize, height/tileSize);
+        render(g, map, width/tileSize, height/tileSize, tileSize);
+    </script>
+</body>
