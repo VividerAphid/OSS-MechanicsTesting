@@ -29,8 +29,11 @@ function fillMap(widthCount, heightCount){
             let pick;
             if(y <= heights[x][0]){
                 if(y < heights[x][1]) pick = 3;
-                else if(y < heights[x][0] || y < waterLevel-1   ) pick = 7;
+                else if(y < heights[x][0] || y < waterLevel-1) pick = 7;
                 else pick = 8;
+                if(Math.random() < .05 && y < heightCount*.1) pick = 1;
+                if(Math.random() < .1 && y < heightCount*.4) pick = 2;
+                if(Math.random() < .1 && y < heightCount*.25) pick = 4;
             }
             else{
                 if(y < waterLevel) pick = 9;
