@@ -40,6 +40,7 @@ function fillMap(widthCount, heightCount){
         }
     }
     mapOut = pickOres(colorList, mapOut, widthCount, heightCount);
+    //mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
     return mapOut;
 }
 
@@ -62,6 +63,22 @@ function pickOres(colors, map, width, height){
             if(Math.random() < .25 && map[(xPick+1) + yPick*width] != "#222") map[(xPick+1) + yPick*width] = ores[r].color;
             if(Math.random() < .25 && map[xPick + (yPick-1)*width] != "#222") map[xPick + (yPick-1)*width] = ores[r].color;
             if(Math.random() < .25 && map[xPick + (yPick+1)*width] != "#222") map[xPick + (yPick+1)*width] = ores[r].color;
+        }
+    }
+    return map;
+}
+function pickCaves(map, width, height, colors){
+    let count = Math.floor(Math.random()*(width*.3));
+    let min = 0;
+    let max = height*.6;
+    for(let r = 0; r < count; r++){
+        let yPick = Math.floor(Math.random()*(max-min))+min;
+        let xPick = Math.floor(Math.random()*width);
+        for(let y = 0; y < 6; y++){
+            let x = -3;
+            for(x; x < 3; x++){
+                map[(xPick-x) + (yPick+y)*width] = colors[0];  
+            }
         }
     }
     return map;
