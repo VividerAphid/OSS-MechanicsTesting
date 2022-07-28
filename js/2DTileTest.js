@@ -19,7 +19,7 @@ function initCanvas(canvas, width, height){
 }
 
 function fillMap(widthCount, heightCount){
-    let colorList = ["#222", "#fff", "#000", "#555", "#f00", "#0f0", "#00f", "#5e2b02", "#126102", "#021fd9", "#a00", "#aa0", "#0aa"];
+    let colorList = ["#222", "#fff", "#000", "#555", "#f00", "#0f0", "#00f", "#5e2b02", "#126102", "#021fd9", "#a00", "#aa0", "#0aa", "#f0f"];
     let mapOut = [];
     //let heights = generateHeights(widthCount, heightCount, (heightCount*.6), (heightCount*.85));
     let heights = generatePerlinHeights(widthCount, heightCount);
@@ -50,7 +50,8 @@ function pickOres(colors, map, width, height){
         {tries: Math.floor(width*.2), color: colors[10], min: 0, max: height*.25},
         {tries: Math.floor(width*.35), color: colors[2], min: 0, max: height*.5},
         {tries: Math.floor(width*.075), color: colors[11], min: 0, max: height*.5},
-        {tries: Math.floor(width*.2), color: colors[12], min: 0, max: height*.80}
+        {tries: Math.floor(width*.2), color: colors[12], min: 0, max: height*.80},
+        {tries: Math.floor(width*.1), color: colors[13], min: height*.8, max: height}
     ]
     for(let r = 0; r < ores.length; r++){
         let min = ores[r].min;
@@ -86,7 +87,7 @@ function pickCaves(map, width, height, colors){
 
 function generatePerlinHeights(width, height){
     let seed = getSeed(width);
-    let noise = perlinNoise(width, seed, 1.3, 8);
+    let noise = perlinNoise(width, seed, 1, 8);
     let output = [];
     for(let r = 0; r < noise.length; r++){
         let airHeight = Math.floor(noise[r]*height/2)+Math.floor(height/2);
@@ -121,4 +122,41 @@ function perlinNoise(width, seed, bias, octaves){
         perlinOutput[x]= noise / accumulate;
     }
     return perlinOutput;
+}
+
+function fillMapRandom(widthCount, heightCount){
+    let colorList = generateRandomColors(14);
+    let mapOut = [];
+    //let heights = generateHeights(widthCount, heightCount, (heightCount*.6), (heightCount*.85));
+    let heights = generatePerlinHeights(widthCount, heightCount);
+    let waterLevel = heightCount*.65;
+    for(let x = 0; x < widthCount; x++){
+        for(let y = 0; y < heightCount; y++){
+            let pick;
+            if(y <= heights[x][0]){
+                if(y < heights[x][1]) pick = 3;
+                else if(y < heights[x][0] || y < waterLevel-1) pick = 7;
+                else pick = 8;
+            }
+            else{
+                if(y < waterLevel) pick = 9;
+                else pick = 0;
+            }
+            mapOut[x + y*widthCount] = colorList[pick];
+        }
+    }
+    mapOut = pickOres(colorList, mapOut, widthCount, heightCount);
+    //mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
+    return mapOut;
+}
+
+function generateRandomColors(count){
+    let output = ["#222"];
+    for(let r = 0; r < count; r++){
+        let rPick = Math.floor(Math.random()*256);
+        let gPick = Math.floor(Math.random()*256);
+        let bPick = Math.floor(Math.random()*256);
+        output.push("rgb(" + rPick + "," + gPick + "," + bPick + ")");
+    }
+    return output;
 }

@@ -10,14 +10,15 @@
 <body>
     <canvas id="mapCanvas">Borke</canvas>
     <script>
-        var width = 1500;
+        var width = 5000;
         var height = 500;
         var tileSize = 5;
         var canvas = document.getElementById("mapCanvas");
         initCanvas(canvas, width, height);
         var g = canvas.getContext("2d");
         //var testMap = ["#f00","#0ff","#f0f"];
-        var map = fillMap(width/tileSize, height/tileSize);
+        //var map = fillMap(width/tileSize, height/tileSize);
+        var map = fillMapRandom(width/tileSize, height/tileSize);
         render(g, map, width/tileSize, height/tileSize, tileSize);
     </script>
 </body>
