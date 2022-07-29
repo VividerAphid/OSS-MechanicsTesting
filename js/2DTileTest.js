@@ -125,7 +125,8 @@ function perlinNoise(width, seed, bias, octaves){
 }
 
 function fillMapRandom(widthCount, heightCount){
-    let colorList = generateRandomColors(14);
+    let colorCount = Math.floor(Math.random()*10)+10;
+    let colorList = generateRandomColors(colorCount);
     let mapOut = [];
     //let heights = generateHeights(widthCount, heightCount, (heightCount*.6), (heightCount*.85));
     let heights = generatePerlinHeights(widthCount, heightCount);
@@ -134,18 +135,18 @@ function fillMapRandom(widthCount, heightCount){
         for(let y = 0; y < heightCount; y++){
             let pick;
             if(y <= heights[x][0]){
-                if(y < heights[x][1]) pick = 3;
-                else if(y < heights[x][0] || y < waterLevel-1) pick = 7;
-                else pick = 8;
+                if(y < heights[x][1]) pick = 1;
+                else if(y < heights[x][0] || y < waterLevel-1) pick = 2;
+                else pick = 3;
             }
             else{
-                if(y < waterLevel) pick = 9;
+                if(y < waterLevel) pick = 4;
                 else pick = 0;
             }
             mapOut[x + y*widthCount] = colorList[pick];
         }
     }
-    mapOut = pickOres(colorList, mapOut, widthCount, heightCount);
+    mapOut = pickOresRandom(colorList, mapOut, widthCount, heightCount, (colorCount-4));
     //mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
     return mapOut;
 }
@@ -159,4 +160,31 @@ function generateRandomColors(count){
         output.push("rgb(" + rPick + "," + gPick + "," + bPick + ")");
     }
     return output;
+}
+
+function pickOresRandom(colors, map, width, height, count){
+    //{tries: Math.floor(width*.075), color: colors[1], min: 0, max: height*.1}
+    let ores = []
+    for(let t = 0; t < count; t++){
+        let tries = Math.floor(width*((Math.random()*.5)+.01));
+        let color = colors[t+4];
+        let min = Math.floor(Math.random()*(height*.75));
+        let max = Math.floor(Math.random()*(height*.9))+min;
+        if (max >= height) max = height;
+        ores.push({tries, color, min, max});
+    }
+    for(let r = 0; r < ores.length; r++){
+        let min = ores[r].min;
+        let max = ores[r].max;
+        for(let t = 0; t < ores[r].tries; t++){
+            let yPick = Math.floor(Math.random()*(max-min))+min;
+            let xPick = Math.floor(Math.random()*width);
+            if(map[xPick + yPick*width] != "#222") map[xPick + yPick*width] = ores[r].color;
+            if(Math.random() < .25 && map[(xPick-1) + yPick*width] != "#222") map[(xPick-1) + yPick*width] = ores[r].color;
+            if(Math.random() < .25 && map[(xPick+1) + yPick*width] != "#222") map[(xPick+1) + yPick*width] = ores[r].color;
+            if(Math.random() < .25 && map[xPick + (yPick-1)*width] != "#222") map[xPick + (yPick-1)*width] = ores[r].color;
+            if(Math.random() < .25 && map[xPick + (yPick+1)*width] != "#222") map[xPick + (yPick+1)*width] = ores[r].color;
+        }
+    }
+    return map;
 }
