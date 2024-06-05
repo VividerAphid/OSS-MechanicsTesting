@@ -56,6 +56,7 @@
         gameCanvas.addEventListener("touchstart", (e) => handleTouch(e, onPointerDown, materialArtist, materialNodes));
         gameCanvas.addEventListener("touchmove", (e) => handleTouch(e, onPointerMove, materialArtist, materialNodes));
         gameCanvas.addEventListener("touchend", (e) => handleTouch(e, onPointerUp, materialArtist, materialNodes));
+        gameCanvas.addEventListener( 'wheel', (e) => adjustZoom(materialArtist, e.deltaY*materialArtist.scrollSensitivity));
 
         requestAnimationFrame(function(){updateTranslationAndZoom(materialArtist, materialNodes);});
     </script>

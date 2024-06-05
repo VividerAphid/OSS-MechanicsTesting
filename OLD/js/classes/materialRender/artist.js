@@ -6,6 +6,7 @@ class artist{
         this.cameraZoom = 1;
         this.maxZoom = 5;
         this.minZoom = 0.1;
+        this.lastZoom = this.cameraZoom;
         this.scrollSensitivity = 0.0005;
         this.isDragging = false;
         this.dragChanged = false;

@@ -40,7 +40,7 @@ function fillMap(widthCount, heightCount){
         }
     }
     mapOut = pickOres(colorList, mapOut, widthCount, heightCount);
-    //mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
+    mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
     return mapOut;
 }
 
@@ -69,17 +69,40 @@ function pickOres(colors, map, width, height){
     return map;
 }
 function pickCaves(map, width, height, colors){
-    let count = Math.floor(Math.random()*(width*.3));
+    let count = Math.floor(Math.random()*(width*.2));
     let min = 0;
-    let max = height*.6;
+    let max = height*.7;
     for(let r = 0; r < count; r++){
-        let yPick = Math.floor(Math.random()*(max-min))+min;
+        let hei = Math.floor(Math.random()*(max-min))+min;
         let xPick = Math.floor(Math.random()*width);
-        for(let y = 0; y < 6; y++){
-            let x = -3;
-            for(x; x < 3; x++){
-                map[(xPick-x) + (yPick+y)*width] = colors[0];  
+        let length = Math.floor(Math.random()*50) + 10;
+        if(length > width - (width - xPick)){
+            length = width - (width - xPick);
+        }
+        for(let x = 0; x < length; x++){
+            let ex1 = Math.random();
+            let ex2 = Math.random();
+            map[(xPick+x) + (hei+1)*width] = colors[0];
+            map[(xPick+x) + (hei)*width] = colors[0];
+            map[(xPick+x) + (hei+2)*width] = colors[0];
+            if(ex1 > .8){
+                map[(xPick+x) + (hei+3)*width] = colors[0];
+                if(ex2 > .8){
+                    map[(xPick+x) + (hei+4)*width] = colors[0];
+                }
             }
+        
+            let dir = Math.random();
+            if(dir > .7){
+                if(hei < max-2){
+                    hei++;
+                }
+            }
+            if(dir < .4){
+                if(hei > min+2){
+                    hei--;
+                }
+            }  
         }
     }
     return map;
@@ -147,7 +170,7 @@ function fillMapRandom(widthCount, heightCount){
         }
     }
     mapOut = pickOresRandom(colorList, mapOut, widthCount, heightCount, (colorCount-4));
-    //mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
+    mapOut = pickCaves(mapOut, widthCount, heightCount, colorList);
     return mapOut;
 }
 

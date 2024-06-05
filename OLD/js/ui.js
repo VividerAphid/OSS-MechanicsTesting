@@ -109,12 +109,13 @@ function handleTouch(e, singleTouchHandler, art, mats)
     {
       //console.log("pinch");
         art.isDragging = false;
-        //handlePinch(e)
+        handlePinch(e)
     }
 }
 
-function handlePinch(e)
+function handlePinch(e, art)
 {
+  let initialPinchDistance = null;
     e.preventDefault();
     
     let touch1 = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -126,23 +127,23 @@ function handlePinch(e)
         initialPinchDistance = currentDistance;
     }
     else{
-        adjustZoom(null, currentDistance/initialPinchDistance);
+        adjustZoom(art, null, currentDistance/initialPinchDistance);
     }
 }
 
-function adjustZoom(zoomAmount, zoomFactor)
+function adjustZoom(art, zoomAmount, zoomFactor)
 {
-    if (!isDragging){
+    if (!art.isDragging){
         if (zoomAmount){
-            cameraZoom += zoomAmount;
+          art.cameraZoom += zoomAmount;
         }
         else if (zoomFactor){
             console.log(zoomFactor);
-            cameraZoom = zoomFactor*lastZoom;
+            art.cameraZoom = zoomFactor*art.lastZoom;
         }
         
-        cameraZoom = Math.min(cameraZoom, MAX_ZOOM);
-        cameraZoom = Math.max(cameraZoom, MIN_ZOOM);
+        art.cameraZoom = Math.min(art.cameraZoom, art.maxZoom);
+        art.cameraZoom = Math.max(art.cameraZoom, art.minZoom);
         
         console.log(zoomAmount);
     }
