@@ -1,0 +1,36 @@
+body{
+    background-color: #222;
+    color: #fff;
+}
+.holder-hidden{
+    display: "inline-block";
+}
+.holder-bordered{
+    display: "inline-block";
+    border: 3px solid rgb(175, 174, 174);
+	border-radius: 5px;
+}
+.menu{
+    border: 3px solid rgb(175, 174, 174);
+	border-radius: 5px;
+	width: 32%;
+	vertical-align: top;
+	display: inline-block;
+}
+.mapDiv{
+    display: inline;
+    width: 65%;
+}
+.mapCan{
+    border: 3px solid rgb(175, 174, 174);
+	border-radius: 5px;
+    
+}
+.inventorySlot{
+    display: inline-block;
+    border: 3px solid rgb(175, 174, 174);
+	border-radius: 5px;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+}
