@@ -13,10 +13,10 @@ class chunk{
         let chunkW = 16;
         let chunkH = 128;
         let tileSize = 5;
-        console.log("drawing relative to " + this.x);
+        let padding = 10;
         for(let x=0; x < chunkW; x++){
             for(let y=0; y < chunkH; y++){
-                this.blocks[x + y*chunkW].render(G,(width-((x+this.x)*tileSize)), (height-y*tileSize), tileSize);
+                this.blocks[x + y*chunkW].render(G,(((x+this.x)*tileSize)+padding), (height-y*tileSize), tileSize);
             }
         }
     }
@@ -53,7 +53,7 @@ class world{
         this.loadedChunks = []; //list of only actively loaded chunks;
         this.materials = [];
         this.generateMaterials();
-        this.testChunks(10);
+        this.testChunks(100);
     }
     render(G){
         for(let r = 0; r < this.loadedChunks.length; r++){
@@ -99,11 +99,11 @@ class world{
                     blocks[x + y*16] = new block(this.materials[1]);
                 }
                 else{
-                    blocks[x + y*16] = new block(this.materials[1]);
+                    blocks[x + y*16] = new block(this.materials[0]);
                 }
             }
         }
-        this.chunks.push(new chunk(chunkId, blocks, (chunkId*(5+(16*5)))));
+        this.chunks.push(new chunk(chunkId, blocks, (chunkId*((16+1)))));
     }
     loadChunk(chunkId){
         this.loadedChunks.push(this.chunks[chunkId]);

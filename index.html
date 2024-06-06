@@ -11,10 +11,12 @@
 
 <script src="js/classes/mapHandlerClasses.js"></script>
 <script src="js/perlinTools.js"></script>
+<script src="js/main.js"></script>
 
 <body>
     <canvas id="mapCanvas">Uh oh! Canvas isn't allowed on this device :(</canvas>
     <script>
+        initCanvas(mapCanvas, 10000, 750);
         let testWorld = new world(Math.random()*10000);
         let ctx = mapCanvas.getContext("2d");
         testWorld.render(ctx);
