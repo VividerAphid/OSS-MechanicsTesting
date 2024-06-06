@@ -14,4 +14,9 @@
 
 <body>
     <canvas id="mapCanvas">Uh oh! Canvas isn't allowed on this device :(</canvas>
+    <script>
+        let testWorld = new world(Math.random()*10000);
+        let ctx = mapCanvas.getContext("2d");
+        testWorld.render(ctx);
+    </script>
 </body>

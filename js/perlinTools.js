@@ -1,4 +1,4 @@
-function generatePerlinHeights(width, height, seed){
+function generatePerlinHeightsOLD(width, height, seed){
     let seedList = getSeed(width, seed);
     let noise = perlinNoise(width, seedList, 1, 8);
     let output = [];
@@ -10,18 +10,22 @@ function generatePerlinHeights(width, height, seed){
     return output;    
 }
 
-function getSeed(width, seed){
-    let aphidRan = "";
+function generatePerlinHeights(width, height, seed, perlinParams){
+    //Perlin params: {bias, octaves}
+    let seedList = getSeed(width, seed);
+    let noise = perlinNoise(width, seedList, perlinParams.bias, perlinParams.octaves);
+    let output = [];
+    for(let r = 0; r < noise.length; r++){
+        let airHeight = Math.floor(noise[r]*height/2)+Math.floor(height/2);
+        output.push(airHeight);
+    }
+    return output;   
+}
+
+function getSeed(width, seed=Math.random()*10000){
+    let aphidRan = new AphidRandom(seed);
     let output = []
-    if(seed){
-        console.log("Seeded");
-        aphidRan = new AphidRandom(seed);
         for(let r = 0; r < width; r++) output[r] = aphidRan.rangeDec(0, 1);
-    }
-    else{
-        console.log("unseeded");
-        for(let r = 0; r < width; r++) output[r] = Math.random();
-    }
     return output;
 }
 
