@@ -116,6 +116,7 @@ function generatePerlinHeights(width, height){
         let airHeight = Math.floor(noise[r]*height/2)+Math.floor(height/2);
         output.push([airHeight, airHeight-(Math.floor(Math.random()*3)+4)]);
     }
+    console.log(seed);
     return output;    
 }
 
